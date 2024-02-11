@@ -1,0 +1,19 @@
+# Ignore private config.ini
+config.ini
+
+# Ignore all python specific and pycharm folders
+__pycache__/
+.idea/
+
+# Ignore all yolo models
+models/*
+
+# Ignore all files with jpg and log extensions
+*.jpg
+*.log
+
+# Leave all .gitkeep and documentation jpgs
+!**/.gitkeep
+!logs/detection_frames/example1.jpg
+!logs/detection_frames/example2.jpg
+!logs/detection_frames/example3.jpg
