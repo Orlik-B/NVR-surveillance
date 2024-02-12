@@ -12,19 +12,19 @@ class BufferlessVideoCapture:
     A class for camera objects capturing video frames without buffering.
     """
 
-    def __init__(self, camera_name: str, rtsp_address: str, zones: list, draw_frames: bool) -> None:
+    def __init__(self, camera_name: str, stream_address: str, zones: list, draw_frames: bool) -> None:
         """
         Initializes the BufferlessVideoCapture object.
 
 
         Args:
             camera_name:
-            rtsp_address: rtsp address to the camera. For example:
+            stream_address: rtsp address to the camera. For example:
                           rtsp://{USER}:{PASSWORD}@192.168.1.{HOST_PART}:554/{NVR_ADDRESS_TO_CAMERA_STREAM}
             zones: Zones used to skip detections
             draw_frames: Flag for showing window with detection (True can be set only if OS has GUI (is not a server))
         """
-        self.cap = cv2.VideoCapture(rtsp_address)
+        self.cap = cv2.VideoCapture(stream_address)
         self.q = queue.Queue()
         self.t = threading.Thread(target=self._reader)
         self.t.daemon = True

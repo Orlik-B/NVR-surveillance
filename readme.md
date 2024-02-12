@@ -47,8 +47,6 @@ Before running the script, you need to set up your own `config.ini` file. Use `c
 
 General parameters used in the script.
 
-- **base_address**: RTSP address to connect to cameras. It contains a dynamic mask `{channel}` that's filled dynamically with the appropriate camera channel set separately for each camera.
-
 - **min_detections_in_a_row**: Minimum consecutive detections required before notifying the user. Each camera has its detection counter. Multiple detections can help reduce false positives
 
 - **main_loop_minimum_time_duration**: Artificial delay to slow down the surveillance process (in seconds). It can be used to limit CPU/GPU/Power consumption (limit processed FPS).
@@ -91,11 +89,11 @@ Section set separately for each camera (if you want to add more cameras, add mul
 
 Each camera section should be filled with these parameters:
 
-- **camera_channel**: Camera channel to fill `base_address` from the `Parameters` section.
+- **stream_address**: Stream (mainly RTSP, but not only) address to connect to the camera stream.
 
 - **zoom_in**: `False` or list of 4 elements (e.g., `[100, 200, 300, 400]`) for zooming in frames from left, right, top, and bottom.
 
-- **show_camera_window**: Boolean flag (True/False) to display live visualization on the PC screen.
+- **show_camera_window**: Boolean flag (True/False) to display live visualization on the PC screen. If you run project on server, set False or it produce no Graphical shell error
 
 - **zones**: List of 4-element lists, containing xyxy rectangle coordinates defining 'no detection zones'. Coordinates range from 0 to 1 due to scaled frames. Example: `[[0, 0, 0.26, 1], [0, 0, 0.6, 0.48], [0, 0, 1, 0.27]]` for three zones. Leave an empty list if you want to detect objects in the whole image.
 

@@ -67,9 +67,8 @@ def main():
                 boxes = result.boxes.cpu().numpy()
                 for box in boxes:
                     # if object belongs to one of desired classes and its confidence is above threshold
-                    if box.cls in ast.literal_eval(config['Model']['detection_classes']) and box.conf > float(
-                        config['Model']['confidence']
-                    ):
+                    if (box.cls in ast.literal_eval(config['Model']['detection_classes']) and
+                            box.conf > float(config['Model']['confidence'])):
                         class_name = result.names[box.cls[0]]
                         coordinates = box.xyxy[0].astype(int)
 

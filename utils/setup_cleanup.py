@@ -71,13 +71,18 @@ def setup_cameras(config: configparser.ConfigParser) -> list[BufferlessVideoCapt
     camera_vc_list = []
 
     for camera_config in camera_config_section_names:
-        base_address = config['Parameters']['base_address'].replace('{channel}', config[camera_config]['camera_channel'])
-        zones = ast.literal_eval(config[camera_config]['zones'])
-        draw_frames = eval(config[camera_config]['show_camera_window'])
+        stream_address = config[camera_config]['stream_address']  # Setup Stream
+
+        if 'zones' in config[camera_config].keys():  # Setup no detection zones
+            zones = ast.literal_eval(config[camera_config]['zones'])
+        else:
+            zones = []
+
+        draw_frames = eval(config[camera_config]['show_camera_window'])  # Setup window show mode
         if not isinstance(draw_frames, bool):
             raise ValueError("'show_camera_window' should be set to 'True' or 'False'")
 
-        camera_vc = BufferlessVideoCapture(camera_config, base_address, zones, draw_frames)
+        camera_vc = BufferlessVideoCapture(camera_config, stream_address, zones, draw_frames)
         camera_vc_list.append(camera_vc)
 
     return camera_vc_list
