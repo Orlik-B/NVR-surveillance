@@ -15,7 +15,7 @@ from utils.cv_utils import (
     show_frame,
     save_detection_frame,
 )
-from utils.setup_cleanup import load_config, setup_cameras, cleanup_cameras, calculate_frame_size, init_logging
+from utils.setup_cleanup import load_config, setup_cameras, cleanup_cameras, calculate_frame_size, init_logging, parse_args
 from utils.miscellaneous import calculate_overwatch_end_dt, LoopDelayer, AliveLogger
 from utils.telegram_bot import send_cv2_frame, inform_the_user, send_frame_condition, check_and_report_camera_failure
 
@@ -24,7 +24,8 @@ def main():
     # Configuration
     init_logging('logs')  # Start logging to a file
     logging.info('Loading configuration and running initial setup')
-    config = load_config()  # Load config file
+    args = parse_args()  # Parse input arguments (path to config)
+    config = load_config(args.config_file)  # Load config file
     bot = telepot.Bot(config['Telegram']['token'])  # Prepare telegram bot for sending messages
     inform_the_user(bot, 'Starting overwatch', 3, config)  # Inform user about overwatch start if verbose is set at level 3 or above
 

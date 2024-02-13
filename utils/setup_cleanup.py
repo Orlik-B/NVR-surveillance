@@ -1,3 +1,4 @@
+import argparse
 import ast
 import configparser
 import datetime
@@ -9,6 +10,15 @@ import logging
 import cv2
 
 from utils.camera_tools import BufferlessVideoCapture
+
+
+def parse_args() -> argparse.Namespace:
+    """
+    Parse input arguments
+    """
+    parser = argparse.ArgumentParser(description='Your script description')
+    parser.add_argument('-c', '--config_file', default='config.ini', help='Path to the config file (default: config.ini)')
+    return parser.parse_args()
 
 
 def unhandled_excepthook(exc_type, exc_value, exc_traceback):
@@ -51,6 +61,8 @@ def load_config(path_to_config: str = './config.ini') -> configparser.ConfigPars
     Returns:
     ConfigParser object containing the loaded configuration settings.
     """
+    if not os.path.exists(path_to_config):
+        raise FileNotFoundError(f"Config file does not exist.")
     config = configparser.ConfigParser()
     config.read(path_to_config)
 

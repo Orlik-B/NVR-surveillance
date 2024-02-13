@@ -37,7 +37,7 @@ If detection occurs, the user is informed with a prompt like above.
 3. Download chosen YOLOv8 models and put them into the `models` directory (see: [https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)).
 4. Create and fill your `config.ini` file.
 5. (Optionally) Check if CUDA is available if you want to use GPU (highly recommended).
-6. Run `main.py`.
+6. Run `python main.py` or `python main.py --config_file <path_to_config_file>`.
 
 ### Config Setup
 
